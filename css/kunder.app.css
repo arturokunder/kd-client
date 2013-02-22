@@ -1,0 +1,15 @@
+*
+{
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+a 
+{
+	text-decoration: none;
+	color: #404040;
+	text-shadow: none;
+}
+
+a:HOVER {}
+a:ACTIVE {}
+a:VISITED {}
