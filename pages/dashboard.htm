@@ -10,11 +10,22 @@
     		Handlebars.printTemplate("header", { title : "dashboard" });
     	</script>
     	
+    	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    	
     </head>
     <body id="body">
-    
+    	
+    	<div id="questions"></div>
+    	
     	<script type="text/javascript">
-	    	Handlebars.printTemplate("footer", { });
+    	
+	    	// Load the Visualization API and the piechart package.
+	        google.load('visualization', '1.0', {'packages':['corechart']});
+	        
+	        // Set a callback to run when the Google Visualization API is loaded.
+	        google.setOnLoadCallback($.Votes.getDashboardData);
+    	
+    		Handlebars.printTemplate("footer", { });
 	   	</script>
     </body>
 </html>

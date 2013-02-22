@@ -13,3 +13,47 @@ a
 a:HOVER {}
 a:ACTIVE {}
 a:VISITED {}
+
+input {
+	padding: 8px;
+}
+
+input[type=text], input[type=password] {
+	border-radius: 3px;
+	border: 1px solid #ccc;
+}
+
+.footer {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 10px;
+	color: #222222;
+}
+
+.loginBox {
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	
+	text-align: center;
+	
+	padding: 20px;
+	
+	border: 1px solid #6698FF;
+	border-radius: 10px;
+	background-color: #6698FF;
+	
+	display: block;
+}
+
+.loginInput {
+	width: 90%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.loginSubmit {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}

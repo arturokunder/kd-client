@@ -12,19 +12,21 @@
     	
     </head>
     <body id="body">
+    	
 		<form action="loging.htm">
-			<label for="user">Usuario</label>
-			<input id="user" type="text" />
-			<br />
-			<label for="pass">Password</label>
-			<input id="pass" type="password" />
-			<br />
-			<input type="submit" onclick="$.Storage.setLoginParams($('#user').val(), $('#pass').val());" />
+			<div class=loginBox>
+				<input id="user" type="text" class="loginInput" placeholder="Usuario" />
+				<input id="pass" type="password" class="loginInput" placeholder="Contraseña" />
+				<input type="submit" class="loginSubmit" onclick="$.Storage.setLoginParams($('#user').val(), $('#pass').val());" />
+			</div>
 		</form>
 		
-		_username 	= "mcontreras";
-		<br />
-		_privateKey	= "MC4yNzgxMTQwODk5NTgyMDEzLTAxLTE4IDAw";
+		<div class="footer">
+			<br />
+			"mcontreras"
+			<br />
+			"MC4yNzgxMTQwODk5NTgyMDEzLTAxLTE4IDAw";
+		</div>
 		
 		<script type="text/javascript">
 	    		Handlebars.printTemplate("footer", { });

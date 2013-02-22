@@ -2,10 +2,7 @@ jQuery.Login = (function($) {
 
 	function _login() {
 		
-		var user = $.Storage.getUser();
-		var pass = $.Storage.getPassword();
-		
-		$.when(_getLoginState(user, pass))
+		$.when(_getLoginState())
 		.then( 
 			function() { 
 				window.location.href = "dashboard.htm";
@@ -15,7 +12,7 @@ jQuery.Login = (function($) {
 			});
 	}
 	
-	function _getLoginState(user, pass) {
+	function _getLoginState() {
 		
 		var deferred = $.Deferred();
 		
@@ -23,7 +20,7 @@ jQuery.Login = (function($) {
             url: 		'http://sleepy-river-3269.herokuapp.com/api/poll/2/',
             type: 		'POST',
             dataType: 	'json',
-            data: 		$.Server.GenerateTokenData(user, pass),
+            data: 		$.Server.GenerateTokenData(),
             success: 	function(data) {
             	if(data.id) {
             		deferred.resolve();

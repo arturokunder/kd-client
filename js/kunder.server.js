@@ -1,14 +1,16 @@
 jQuery.Server = (function($) {
 	
-	function _generateTokenData(user, privateKey) {
+	function _generateTokenData() {
 		
 		// user: usuario del sistema
 		// key: private key del user
 		// date: fecha UTC con formato: 0000-00-00 00:00:00
-       	var date 		= $.DateTimeFormatter.Now();
+		var user = $.Storage.getUser();
+		var pass = $.Storage.getPassword();
+       	var date = $.DateTimeFormatter.Now();
 		
        	// token: Hmac-SHA1 en Base64 usando la key y date+user
-		var token = CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA1(date + user, privateKey));
+		var token = CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA1(date + user, pass));
 		
 		return { 	
 				date 		: date, 
@@ -16,7 +18,8 @@ jQuery.Server = (function($) {
 				token 		: token
 			};
 	}
+	
 	return {
-		GenerateTokenData: _generateTokenData,
+		GenerateTokenData	: _generateTokenData,
 	};
 }(jQuery));
