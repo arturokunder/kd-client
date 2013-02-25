@@ -10,16 +10,42 @@
     		Handlebars.printTemplate("header", { title : "login" });
     	</script>
     	
+    	<link rel="stylesheet" type="text/css" href="../css/kunder.login.css" />
+    	<script type="text/javascript" src="../js/kunder.login.js"></script>
+    	
+    	
     </head>
     <body id="body">
-    	
-		<form action="loging.htm">
-			<div class=loginBox>
+    	<div class="background"></div>
+    	<div class=loginBox>
+    		
+   			<img src="../img/logo.white.png" class="loginLogo"/>
+    		
+    		<form id="loginForm">
+				<div id="loginError" class="loginError">
+					Nombre de usuario o contraseña incorrecto
+				</div>
+			
 				<input id="user" type="text" class="loginInput" placeholder="Usuario" />
 				<input id="pass" type="password" class="loginInput" placeholder="Contraseña" />
-				<input type="submit" class="loginSubmit" onclick="$.Storage.setLoginParams($('#user').val(), $('#pass').val());" />
-			</div>
-		</form>
+				
+				<div>
+					<input type="submit" class="loginSubmit" 
+						onclick=
+							"$.Storage.setLoginParams($('#user').val(), $('#pass').val());
+							$.Login.Login();
+							showLoading();
+							return false;
+					" />
+				</div>
+			</form>
+			
+			<img src="../img/loading.gif" class="loading" />
+		
+		</div>
+		
+		
+		
 		
 		<div class="footer">
 			<br />
@@ -30,6 +56,21 @@
 		
 		<script type="text/javascript">
 	    		Handlebars.printTemplate("footer", { });
+	    		
+	    		function showLoading() {
+	    			$('#loginForm').hide();
+	    			$('.loading').css('visibility', 'visible');
+	    		}
+	    		
+	    		function showLogin(error) {
+	    			error = typeof error !== 'undefined' ? error : false;
+	    			$('#loginForm').show();
+	    			$('.loading').css('visibility', 'collapse');
+	    			
+	    			if(error) {
+	    				$('#loginError').css('visibility', 'visible');
+	    			}
+	    		}
 	   	</script>
     </body>
 </html>

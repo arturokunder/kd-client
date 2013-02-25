@@ -8,7 +8,7 @@ jQuery.Login = (function($) {
 				window.location.href = "dashboard.htm";
 			}, 
 			function() { 
-				window.location.href = "login.htm";
+				showLogin(true);
 			});
 	}
 	

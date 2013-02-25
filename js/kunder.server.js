@@ -1,4 +1,20 @@
 jQuery.Server = (function($) {
+
+	function _getPollQuestions(pollId, callbackSuccess) {
+		$.ajax({
+            url: 		'http://sleepy-river-3269.herokuapp.com/api/poll/' + pollId + '/',
+            type: 		'POST',
+            dataType: 	'json',
+            data: 		_generateTokenData(),
+            success: 	function(data) {
+            	$.Storage.setQuestions(pollId, data);
+            	callbackSuccess(data);
+            },
+            error: 		function(jqXHR, textStatus, error) {
+            	console.log("ajax error");
+            }
+        });
+	}
 	
 	function _generateTokenData() {
 		
@@ -20,6 +36,7 @@ jQuery.Server = (function($) {
 	}
 	
 	return {
+		getPollQuestions	: _getPollQuestions,
 		GenerateTokenData	: _generateTokenData,
 	};
 }(jQuery));

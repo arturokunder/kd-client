@@ -14,11 +14,32 @@ jQuery.Storage = (function($) {
 		return window.localStorage.getItem("pass");
 	}
 	
+	
+	function _setQuestions(pollId, data) {
+		var old = _getQuestions(pollId);
+		var json = JSON.stringify(data);
+		
+		if(old != null && old == json) {
+			return;
+		}
+		else {
+			window.localStorage.setItem("poll-" + pollId, json);
+			$(document).trigger('questionsChanged', []);
+		}
+	}
+	
+	function _getQuestions(pollId) {
+		return  window.localStorage.getItem("poll-" + pollId);
+	}
+	
 	return {
 		setLoginParams	: _setLoginParams,
 		
 		getUser			: _getUser,
 		getPassword		: _getPassword,
+		
+		setQuestions	: _setQuestions,
+		getQuestions	: _getQuestions,
 		
 	};
 }(jQuery));

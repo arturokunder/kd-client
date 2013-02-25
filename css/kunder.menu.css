@@ -1,0 +1,52 @@
+.sideMenu {
+    border: 1px solid #619FDB;
+    border-radius: 10px;
+    
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    width: 200px;
+    height: 100%;
+    
+    background: #619FDB;
+}
+
+.sideMenu ul {
+	list-style-type: none;
+    padding-top: 0px; 
+    padding-left: 0px;
+    padding-right: 0px;
+    
+    margin: 0px;
+}
+
+.sideMenu li {
+	list-style-type: none;
+    padding:0; 
+    margin:0;
+}
+
+.sideMenu li a {
+    display: block;
+    padding: 10px 15px;
+    
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.sideMenu li a:hover, .sideMenu li a.active {
+    background: #195895;
+    
+    border: 0px solid #195895;
+    
+}
+
+.sideMenu li ul {
+    display: none; // used to hide sub-menus
+}
+
+.sideMenu li ul li a {
+    padding: 10px 25px;
+    background: #91B7DB;
+    border-bottom: 1px dotted #2C4864;
+}
