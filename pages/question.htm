@@ -7,7 +7,7 @@
     	<script type="text/javascript" src="../js/kunder.handlebars.js"></script>
     	
     	<script type="text/javascript">
-    		Handlebars.printTemplate("header", { title : "dashboard" });
+    		Handlebars.printTemplate("header", { title : "question" });
     	</script>
     	
     	<link rel="stylesheet" type="text/css" href="../css/kunder.dashboard.css" />
@@ -21,26 +21,14 @@
     	<div class="content">
     		<div id="leftContent" class="leftContent"></div>
 	   		<script type="text/javascript">
-	   			$.Menu.CreateMenu($('#leftContent'), 'dashboard.htm');
+	   			var hash = window.location.hash.substring(1);
+	   			$.Menu.CreateMenu($('#leftContent'), 'question.htm#' + hash);
 	   		</script>
     		<div id="rightContent" class="rightContent">
-		    	<div id="questions"></div>
-		    	
+		    	QUESTION 
 		    	<script type="text/javascript">
-		    		// Load the Visualization API and the piechart package.
-			        google.load('visualization', '1.0', {'packages':['corechart']});
-			        
-		    		var chartsLoaded;
 		    		
-			        if(chartsLoaded) {
-			        	$.Votes.getDashboardData();
-			        }
-			        
-			        // Set a callback to run when the Google Visualization API is loaded.
-			        google.setOnLoadCallback(function() {
-			        	$.Votes.getDashboardData();
-			        	chartsLoaded = true;
-			        });
+		    		
 		    	</script>
 		   	</div>
 	   	</div>

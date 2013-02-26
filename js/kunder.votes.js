@@ -5,8 +5,6 @@ jQuery.Votes = (function($) {
 	}
 	
 	function _getQuestionSuccessCallback(data) {
-		console.log(JSON.stringify(data));
-		
 		data.questions = $.Sorter.SortAsc(data.questions, "order");
 		
 		$.each(data.questions, function(i, item) {
@@ -58,9 +56,7 @@ jQuery.Votes = (function($) {
 			data.addRow([question.choices[i].text, parseInt(question.choices[i].votes)]);
 		});
 		
-		var options = {};
-		var chart = new google.visualization.PieChart($('#chart-' + question.id)[0]);
-		chart.draw(data, options);
+		$.Charts.DrawDashboardChart(question, data);
 	}
 	
 	function _getVotes(pollId, questionId, choiceId, tsStart, tsEnd, callbackSuccess, choice) {

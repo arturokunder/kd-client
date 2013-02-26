@@ -8,6 +8,7 @@ Secundario 3: #E69117 (naranjo)
 Principal var 1: #619FDB
 Principal var 2: #91B7DB
 Principal var 3: #2C4864
+Principal var 4: #052B50
 
 Esquema completo: http://colorschemedesigner.com/#3.40KsOsOFfFf
 
@@ -43,6 +44,15 @@ input[type=text], input[type=password] {
 	border: 1px solid #ccc;
 }
 
+.loading {
+	display: block;
+	width: 100px;
+	
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+}
+
 .content {
 	display: table;
 }
@@ -63,6 +73,4 @@ input[type=text], input[type=password] {
 	margin-right: auto;
 	font-size: 10px;
 	color: #999999;
-	
-	height: 1000px;
 }

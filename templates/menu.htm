@@ -1,45 +1,36 @@
 <div class="sideMenu">
+	<div class="sideMenuLogo" >
+		<img src="../img/logo.white.png"  width="100%"/>
+	</div>
 	<ul class="menu">
-		<li><a href="#">Resumen</a>
+		<li><a href="dashboard.htm">Inicio</a></li>
+		<li><a>Detalle</a>
 			<ul>
 				{{#each data.questions}}
-				<li><a href="#">{{this.question}}</a></li>
+					<li><a href="question.htm#{{this.id}}">{{this.question}}</a></li>
 			  	{{/each}}
 			</ul>
 	  </li>
-	  <li><a href="#">Item 2</a>
+	  <li><a>Item 2</a>
 	    <ul>
-	      <li><a href="#">Sub-Item 2 a</a></li>
-	      <li><a href="#">Sub-Item 2 b</a></li>
+	      <li><a>pushstate a</a></li>
+	      <li><a>Sub-Item 2 b</a></li>
 	    </ul>
 	  </li>
-	  <li><a href="#">Item 3</a>
+	  <li><a>Item 3</a>
 	    <ul>
-	      <li><a href="#">Sub-Item 3 a</a></li>
-	      <li><a href="#">Sub-Item 3 b</a></li>
-	      <li><a href="#">Sub-Item 3 c</a></li>
-	      <li><a href="#">Sub-Item 3 d</a></li>
+	      <li><a>Sub-Item 3 a</a></li>
+	      <li><a>Sub-Item 3 b</a></li>
+	      <li><a>Sub-Item 3 c</a></li>
+	      <li><a>Sub-Item 3 d</a></li>
 	    </ul>
 	  </li>
-	  <li><a href="#">Item 4</a>
+	  <li><a>Item 4</a>
 	    <ul>
-	      <li><a href="#">Sub-Item 4 a</a></li>
-	      <li><a href="#">Sub-Item 4 b</a></li>
-	      <li><a href="#">Sub-Item 4 c</a></li>
+	      <li><a>Sub-Item 4 a</a></li>
+	      <li><a>Sub-Item 4 b</a></li>
+	      <li><a>Sub-Item 4 c</a></li>
 	    </ul>
 	  </li>
 	</ul>
 </div>
-
-<script type="text/javascript">
-	$(document).ready(function () {
-	  $('.menu > li > a').click(function(){
-	    if ($(this).attr('class') != 'active'){
-	      $('.menu li ul').slideUp();
-	      $(this).next().slideToggle();
-	      $('.menu li a').removeClass('active');
-	      $(this).addClass('active');
-	    }
-	  });
-	});
-</script>

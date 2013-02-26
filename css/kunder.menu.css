@@ -11,6 +11,33 @@
     background: #619FDB;
 }
 
+.sideMenuLogo {
+	width: 100px;
+	
+	margin-top: 10px;
+	margin-bottom: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.sideMenuLoading {
+	background-color: #eeeeee;
+	background-image: url('../img/loading.gif');
+	background-repeat: no-repeat;
+	background-size: 30px;
+	background-position: 90% 50%;
+	
+	
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	
+	opacity: 0.5;
+	
+	top: 0;
+	left: 0;
+}
+
 .sideMenu ul {
 	list-style-type: none;
     padding-top: 0px; 
@@ -18,16 +45,20 @@
     padding-right: 0px;
     
     margin: 0px;
+    
+    cursor: pointer;
 }
 
 .sideMenu li {
 	list-style-type: none;
     padding:0; 
     margin:0;
+    
+    position: relative;
 }
 
 .sideMenu li a {
-    display: block;
+	display: block;
     padding: 10px 15px;
     
     text-decoration: none;
