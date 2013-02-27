@@ -6,34 +6,47 @@
     	<script type="text/javascript" src="../js/lib/handlebars.js"></script>
     	<script type="text/javascript" src="../js/kunder.handlebars.js"></script>
     	
+    	<!-- Includes general scripts and  css-->
     	<script type="text/javascript">
     		Handlebars.printTemplate("header", { title : "question" });
     	</script>
     	
-    	<link rel="stylesheet" type="text/css" href="../css/kunder.dashboard.css" />
+    	<!-- Include here other js and css -->
     	
     </head>
     <body id="body">
     	
+    	<!-- Main div -->
     	<div class="content">
+    		
+    		<!-- Menu div -->
     		<div id="leftContent" class="leftContent"></div>
+    		
+    		<!-- Menu load -->
 	   		<script type="text/javascript">
-	   			var hash = window.location.hash.substring(1);
-	   			$.Menu.CreateMenu($('#leftContent'), 'question.htm#' + hash);
+	   			var hash = window.location.hash;
+	   			$.Menu.CreateMenu($('#leftContent'), 'question.htm' + ( hash ? hash : '' ));
 	   		</script>
+	   		
+	   		<!-- Content div -->
     		<div id="rightContent" class="rightContent">
-		    	QUESTION 
-		    	<script type="text/javascript">
-		    		
-		    		
-		    	</script>
+		    
+			    <!-- Place content here -->
+			    <div style="text-align: left;">
+			    	questions...
+			    </div>
+			    
+			    <!-- When content loaded, trigger event -->
+			    <script type="text/javascript">
+			    	$(document).trigger('pageLoaded', []);
+			    </script>
+		    
 		   	</div>
 	   	</div>
 	   	
+	   	<!-- Footer -->
 	   	<script type="text/javascript">
 	   		Handlebars.printTemplate("footer", { });
-	   		
-	   		
 	   	</script>
 	   	
     </body>

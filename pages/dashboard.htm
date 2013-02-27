@@ -24,18 +24,50 @@
 	   			$.Menu.CreateMenu($('#leftContent'), 'dashboard.htm');
 	   		</script>
     		<div id="rightContent" class="rightContent">
-    			<div id="dailyVotes"></div>
-		    	<div id="questions"></div>
-		    	<div class="options">
-			    	<a onclick="showChart('pieChart'); return false;">
-			    		<img src="../img/pieChart.png" chart="pieChart" />
-			    	</a>
-			    	<a onclick="showChart('barChart'); return false;">
-			    		<img src="../img/barChart.png" chart="barChart" />
-			    	</a>
-			    	<a onclick="showChart('columnChart'); return false;">
-			    		<img src="../img/columnChart.png" chart="columnChart" />
-			    	</a>
+    			<div id="votes" class="votes">
+	    			<div id="weeklyVotes-lineChart" class="dashboardChart lineChart">
+	    				<div id="chart-weeklyVotes-lineChart">
+	    					<img src="../img/loading.gif" class="loading" />
+	    				</div>
+	    			</div>
+	    			<div id="dayVotes-lineChart" class="dashboardChart lineChart">
+	    				<div id="chart-dayVotes-lineChart">
+	    					<img src="../img/loading.gif" class="loading" />
+	    				</div>
+	    			</div>
+	    			<div id="weeklyVotes-columnChart" class="dashboardChart columnChart">
+	    				<div id="chart-weeklyVotes-columnChart">
+	    					<img src="../img/loading.gif" class="loading" />
+	    				</div>
+	    			</div>
+	    			<div id="dayVotes-columnChart" class="dashboardChart columnChart">
+	    				<div id="chart-dayVotes-columnChart">
+	    					<img src="../img/loading.gif" class="loading" />
+	    				</div>
+	    			</div>
+	    			
+	    			<div class="options">
+				    	<a onclick="showChart('votes', 'lineChart'); return false;">
+				    		<img src="../img/lineChart.png" chart="lineChart" />
+				    	</a>
+				    	<a onclick="showChart('votes', 'columnChart'); return false;">
+				    		<img src="../img/columnChart.png" chart="columnChart" />
+				    	</a>
+			    	</div>
+    			</div>
+    			
+		    	<div id="questions" class="questions">
+			    	<div class="options">
+				    	<a onclick="showChart('questions', 'pieChart'); return false;">
+				    		<img src="../img/pieChart.png" chart="pieChart" />
+				    	</a>
+				    	<a onclick="showChart('questions', 'barChart'); return false;">
+				    		<img src="../img/barChart.png" chart="barChart" />
+				    	</a>
+				    	<a onclick="showChart('questions', 'columnChart'); return false;">
+				    		<img src="../img/columnChart.png" chart="columnChart" />
+				    	</a>
+			    	</div>
 		    	</div>
 		    	
 		    	<script type="text/javascript">
@@ -54,14 +86,17 @@
 			        	$.Votes.getDashboardData();
 			        });
 			        
-			        showChart('pieChart');
+			        showChart('questions', 'pieChart');
+			        showChart('votes', 'lineChart');
 			        
-			        function showChart(type) {
-			        	$('.dashboardChart').hide();
-			        	$('.'+type).css('display', 'inline-block');
+			        function showChart(type, chart) {
 			        	
-			        	$("img[chart='" + type + "']").attr('src', '../img/' + type + '-on.png');
-			        	$("img[chart!='" + type + "']").each(function(){
+			        	$('.' + type + ' > .dashboardChart').hide();
+			        	var a = $('.' + type + ' > .' + chart);
+			        	a.css('display', 'inline-block');
+			        	
+			        	$("." + type + " img[chart='" + chart + "']").attr('src', '../img/' + chart + '-on.png');
+			        	$("." + type + " img[chart!='" + chart + "']").each(function(){
 			        		$(this).attr('src', $(this).attr('src').replace('-on', ''));
 			        	});
 			        }

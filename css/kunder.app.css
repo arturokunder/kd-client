@@ -55,17 +55,24 @@ input[type=text], input[type=password] {
 
 .content {
 	display: table;
+	width: 100%;
 }
 
 .leftContent {
 	vertical-align: top;
     display: table-cell;
+    width: 200px;
 }
 
 .rightContent {
 	display: table-cell;
 	vertical-align: top;
 	padding-left: 20px;
+	
+	margin-left: auto;
+	margin-right: auto;
+	
+	text-align: center;
 }
 .footer {
 	text-align: center;

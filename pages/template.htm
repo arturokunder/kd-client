@@ -24,19 +24,19 @@
     		
     		<!-- Menu load -->
 	   		<script type="text/javascript">
-	   			var hash = window.location.hash.substring(1);
-	   			$.Menu.CreateMenu($('#leftContent'), '#page file name');
+	   			var hash = window.location.hash;
+	   			$.Menu.CreateMenu($('#leftContent'), '[page file name]' + ( hash ? hash : '' ));
 	   		</script>
 	   		
 	   		<!-- Content div -->
     		<div id="rightContent" class="rightContent">
-		    
-		    <!-- Place content here -->
-		    
-		    <!-- When content loaded, trigger event -->
-		    <script type="text/javascript">
-		    	$(document).trigger('pageLoaded', []);
-		    </script>
+			    
+			    <!-- Place content here -->
+			    
+			    <!-- When content loaded, trigger event -->
+			    <script type="text/javascript">
+			    	$(document).trigger('pageLoaded', []);
+			    </script>
 		    
 		   	</div>
 	   	</div>

@@ -2,6 +2,8 @@ jQuery.Votes = (function($) {
 
 	function _getDashboardData() {
 		$.Server.getPollQuestions(2, _getQuestionSuccessCallback);
+		_getWeeklyVotes();
+		_getDayVotes();
 	}
 	
 	function _getQuestionSuccessCallback(data) {
@@ -63,6 +65,45 @@ jQuery.Votes = (function($) {
 	function _getVotesCallbackSuccess(data, questionId, choice, deferred) {
 		choice.votes = data.count;
 		deferred.resolve();
+	}
+	
+	function _getDayVotes() {
+		_createDayVotesDataTable();
+	}
+	
+	function _createDayVotesDataTable() {
+		var data = new google.visualization.DataTable();
+		
+		data.addColumn('string', 'Hora');
+		data.addColumn('number', 'Cantidad');
+		
+		var d = new Date();
+		var h = d.getHours();
+		
+		for(var i = 0; i < 24; i++) {
+			var votes = i < h ? Math.floor((Math.random()*100)+1) : 0;
+			data.addRow([i + ':00', votes]);
+		}
+		
+		$.Charts.DrawDashboardDayVotes(data);
+	}
+	
+	function _getWeeklyVotes() {
+		_createWeeklyVotesDataTable();
+	}
+	
+	function _createWeeklyVotesDataTable() {
+		var data = new google.visualization.DataTable();
+		
+		data.addColumn('string', 'Semana');
+		data.addColumn('number', 'Cantidad');
+		
+		for(var i = 1; i <= 52; i++) {
+			var votes = Math.floor((Math.random()*100)+1);
+			data.addRow([i.toString(), votes]);
+		}
+		
+		$.Charts.DrawDashboardWeeklyVotes(data);
 	}
 	
 	return {
