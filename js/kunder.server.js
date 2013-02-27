@@ -16,6 +16,32 @@ jQuery.Server = (function($) {
         });
 	}
 	
+	function _getQuestionVotes(pollId, questionId, choiceId, tsStart, tsEnd, callbackSuccess, choice) {
+		var deferred = $.Deferred();
+		
+		$.ajax({
+			url: 		'http://sleepy-river-3269.herokuapp.com/api/stats/' + pollId + '/',
+	        type: 		'POST',
+	        dataType: 	'json',
+	        data: 		$.extend({
+	        				question_id : questionId,
+	        				choice_id : choiceId,
+	        				ts_start : "2013-01-01 00:00:00",
+	        				ts_end : $.DateTimeFormatter.Now(),
+	        			}, _generateTokenData()),
+	        success: 	function(data) {
+	        	callbackSuccess(data, questionId, choice, deferred);
+	        },
+	       	error: 		function(jqXHR, textStatus, error) 
+			           	{ 
+			           		console.log("failed: " + error);
+			           		deferred.reject();
+			           	}
+	    });
+		
+		return deferred.promise();
+	}
+	
 	function _generateTokenData() {
 		
 		// user: usuario del sistema
@@ -37,6 +63,6 @@ jQuery.Server = (function($) {
 	
 	return {
 		getPollQuestions	: _getPollQuestions,
-		GenerateTokenData	: _generateTokenData,
+		getQuestionVotes	: _getQuestionVotes,
 	};
 }(jQuery));

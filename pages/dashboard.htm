@@ -24,24 +24,50 @@
 	   			$.Menu.CreateMenu($('#leftContent'), 'dashboard.htm');
 	   		</script>
     		<div id="rightContent" class="rightContent">
+    			<div id="dailyVotes"></div>
 		    	<div id="questions"></div>
+		    	<div class="options">
+			    	<a onclick="showChart('pieChart'); return false;">
+			    		<img src="../img/pieChart.png" chart="pieChart" />
+			    	</a>
+			    	<a onclick="showChart('barChart'); return false;">
+			    		<img src="../img/barChart.png" chart="barChart" />
+			    	</a>
+			    	<a onclick="showChart('columnChart'); return false;">
+			    		<img src="../img/columnChart.png" chart="columnChart" />
+			    	</a>
+		    	</div>
 		    	
 		    	<script type="text/javascript">
 		    		// Load the Visualization API and the piechart package.
 			        google.load('visualization', '1.0', {'packages':['corechart']});
 			        
-		    		var chartsLoaded;
+		    		var chartsAPILoaded;
 		    		
-			        if(chartsLoaded) {
+			        if(chartsAPILoaded) {
 			        	$.Votes.getDashboardData();
 			        }
 			        
 			        // Set a callback to run when the Google Visualization API is loaded.
 			        google.setOnLoadCallback(function() {
+			        	chartsAPILoaded = true;
 			        	$.Votes.getDashboardData();
-			        	chartsLoaded = true;
 			        });
+			        
+			        showChart('pieChart');
+			        
+			        function showChart(type) {
+			        	$('.dashboardChart').hide();
+			        	$('.'+type).css('display', 'inline-block');
+			        	
+			        	$("img[chart='" + type + "']").attr('src', '../img/' + type + '-on.png');
+			        	$("img[chart!='" + type + "']").each(function(){
+			        		$(this).attr('src', $(this).attr('src').replace('-on', ''));
+			        	});
+			        }
+			        
 		    	</script>
+		    	
 		   	</div>
 	   	</div>
 	   	

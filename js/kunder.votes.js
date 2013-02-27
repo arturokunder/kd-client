@@ -28,7 +28,7 @@ jQuery.Votes = (function($) {
 				question.choices[j].id = data.questions[i].choices[j].id;
 				question.choices[j].text = data.questions[i].choices[j].text;
 				
-				ajaxs[j] = _getVotes(
+				ajaxs[j] = $.Server.getQuestionVotes(
 						question.pollId, 
 						question.id, 
 						question.choices[j].id, 
@@ -41,12 +41,12 @@ jQuery.Votes = (function($) {
 			
 			$.when.apply($, ajaxs)
 			.then(function() { 
-				_createDataTable(question);
+				_createQuestionDataTable(question);
 			});
 		});
 	}
 	
-	function _createDataTable(question) {
+	function _createQuestionDataTable(question) {
 		var data = new google.visualization.DataTable();
 		
 		data.addColumn('string', 'Opciones');
@@ -56,33 +56,8 @@ jQuery.Votes = (function($) {
 			data.addRow([question.choices[i].text, parseInt(question.choices[i].votes)]);
 		});
 		
-		$.Charts.DrawDashboardChart(question, data);
-	}
-	
-	function _getVotes(pollId, questionId, choiceId, tsStart, tsEnd, callbackSuccess, choice) {
-		var deferred = $.Deferred();
-		
-		$.ajax({
-			url: 		'http://sleepy-river-3269.herokuapp.com/api/stats/' + pollId + '/',
-	        type: 		'POST',
-	        dataType: 	'json',
-	        data: 		$.extend({
-	        				question_id : questionId,
-	        				choice_id : choiceId,
-	        				ts_start : "2013-01-01 00:00:00",
-	        				ts_end : "2013-12-31 00:00:00"
-	        			}, $.Server.GenerateTokenData()),
-	        success: 	function(data) {
-	        	callbackSuccess(data, questionId, choice, deferred);
-	        },
-	       	error: 		function(jqXHR, textStatus, error) 
-			           	{ 
-			           		console.log("failed: " + error);
-			           		deferred.reject();
-			           	}
-	    });
-		
-		return deferred.promise();
+		$.Charts.DrawDashboardQuestionChart(question, data);
+		$(document).trigger('pageLoaded', []);
 	}
 	
 	function _getVotesCallbackSuccess(data, questionId, choice, deferred) {
@@ -92,6 +67,5 @@ jQuery.Votes = (function($) {
 	
 	return {
 		getDashboardData: 	_getDashboardData,
-		getVotes: _getVotes,
 	};
 }(jQuery));

@@ -1,9 +1,6 @@
 jQuery.Menu = (function($) {
 	
-	var _menuContainer = null;
-	
 	function _createMenu(container, url) {
-		_menuContainer = container;
 		var questions = $.Storage.getQuestions(2);
 		
 		if(questions != null) {
@@ -12,22 +9,14 @@ jQuery.Menu = (function($) {
 			var menu = Handlebars.getTemplate("menu");
 			container.html(menu({ data : data}));
 			
-			/*
-			$(document).ready(function() {
-			$('.menu li a').filter(function() { 
-				//return $(this).attr('href') && $(this).attr('href') == url ? 1 : 0;
-				if($(this).attr('href') && $(this).attr('href') == url) {
-					alert("find");
-					return 1;
-				}
-				return 0;
-			}).click();
-			});*/
-			//element.addClass('active');
-			//element.next().slideToggle(); 
+			//Para partir con elemento seleccionado
+			var selected = $("[href='" + url + "']");
+			selected.closest('.menu > li').children('a').addClass('active').next().slideToggle();
+			selected.parent().append($('<div>').attr("class", "sideMenuLoading"));
 		}
 		
 		$(document).ready(function () {
+			//Menu UI, abre el menu en caso de que el click sea en un elemento principal
 			$('.menu > li > a').click(function(){
 			    var isActive = $(this).attr('class') == 'active';
 				 
@@ -39,10 +28,8 @@ jQuery.Menu = (function($) {
 					$(this).next().slideToggle();
 			    }
 		  	});
-			$('.menu li a')
-				.filter(function() { 
-					return $(this).attr('href') ? 1 : 0; 
-				}).click(function(e) {
+			//Change page, si href está definido el click cambia de página, si no no pasa nada
+			$("[href]").click(function(e) {
 					e.preventDefault();
 					$.Menu.ChangePage($(this).attr("href"));
 					$(this).parent().append($('<div>').attr("class", "sideMenuLoading"));
@@ -56,7 +43,7 @@ jQuery.Menu = (function($) {
 	function _suscribeEvent() {
 		$(document).on("questionsChanged", _questionsChanged);
 		$(document).on("pageLoaded", _pageLoaded);
-		$(window).bind("popstate", _popstate);
+		$(window).on("popstate", _popstate);
 	}
 	
 	function _questionsChanged(e) {
@@ -88,7 +75,6 @@ jQuery.Menu = (function($) {
 			cache: false, //TODO: para debug
 			success : function(data) {	
 				$('#rightContent').html($(data).find("#rightContent").html());
-				$(document).trigger('pageLoaded', []);
 			},
 		});
 	}
