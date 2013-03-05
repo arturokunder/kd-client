@@ -1,0 +1,76 @@
+.newChart {
+	position: absolute;
+	
+	text-align: center;
+	/*margin-left: auto;
+	margin-right: auto;*/
+
+	z-index: 100;
+}
+
+.newChart .hideable {
+	padding: 10px;
+	background-color: rgba(230, 145, 23, 0.7);
+	border-radius: 10px;
+}
+
+.newChart .choices {
+	max-height: 100px;
+	overflow: auto;
+}
+
+.newChart .choices div {
+	display: inline-block;
+	margin: 7px;
+}
+
+.newChart .choicesOption {
+	cursor: pointer;
+	text-align: center;
+	
+	padding: 10px;
+	font-size: 12px;
+	
+}
+
+.newChart .chartType {
+	margin-left: auto;
+	margin-right: auto;
+	
+	padding: 10px;
+}
+
+.newChart .chartType img {
+	max-width: 50px;
+	padding: 20px;
+	display: inline-block;
+}
+
+.newChart .granularity {
+	padding: 15px;	
+}
+
+.newChart .granularity div {
+	display: inline-block;
+	margin: 7px;
+}
+
+.newChart .generate {
+	padding: 20px;
+	text-align: center;
+}
+
+.newChart .showHide {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+.newChart .showHide img {
+	width: 20px;
+}
+
+.questionCharts {
+	position: relative;
+	margin-left: 20px;
+}

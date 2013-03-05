@@ -7,17 +7,7 @@
 }
 
 .dashboardChart {
-	padding: 10px;
-	margin: 10px;
-	margin-top: 0px;
-	width: 350px;
-	height: 250px;
-	
-	display: inline-block;
-	
-	background-color: #FFFFFF;
-	
-	border-radius: 10px;
+
 }
 
 .pieChart {

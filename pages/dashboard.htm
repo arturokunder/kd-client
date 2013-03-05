@@ -12,7 +12,6 @@
     	
     	<link rel="stylesheet" type="text/css" href="../css/kunder.dashboard.css" />
     	
-    	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript" src="../js/kunder.votes.js"></script>
     	
     </head>
@@ -23,27 +22,16 @@
 	   		<script type="text/javascript">
 	   			$.Menu.CreateMenu($('#leftContent'), 'dashboard.htm');
 	   		</script>
+	   		
+	   		
     		<div id="rightContent" class="rightContent">
+    		
     			<div id="votes" class="votes">
-	    			<div id="weeklyVotes-lineChart" class="dashboardChart lineChart">
-	    				<div id="chart-weeklyVotes-lineChart">
-	    					<img src="../img/loading.gif" class="loading" />
-	    				</div>
+	    			<div id="dayVotes-lineChart" class="chart dashboardChart lineChart">
+	    				<div id="chart-dayVotes-lineChart" class="chartLoading"></div>
 	    			</div>
-	    			<div id="dayVotes-lineChart" class="dashboardChart lineChart">
-	    				<div id="chart-dayVotes-lineChart">
-	    					<img src="../img/loading.gif" class="loading" />
-	    				</div>
-	    			</div>
-	    			<div id="weeklyVotes-columnChart" class="dashboardChart columnChart">
-	    				<div id="chart-weeklyVotes-columnChart">
-	    					<img src="../img/loading.gif" class="loading" />
-	    				</div>
-	    			</div>
-	    			<div id="dayVotes-columnChart" class="dashboardChart columnChart">
-	    				<div id="chart-dayVotes-columnChart">
-	    					<img src="../img/loading.gif" class="loading" />
-	    				</div>
+	    			<div id="dayVotes-columnChart" class="chart dashboardChart columnChart">
+	    				<div id="chart-dayVotes-columnChart" class="chartLoading"></div>
 	    			</div>
 	    			
 	    			<div class="options">

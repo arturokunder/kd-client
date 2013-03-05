@@ -12,6 +12,10 @@
     	</script>
     	
     	<!-- Include here other js and css -->
+    	<script type="text/javascript" src="../js/kunder.question.js"></script>
+    	
+    	<link rel="stylesheet" type="text/css" href="../css/kunder.question.css" />
+    	
     	
     </head>
     <body id="body">
@@ -24,23 +28,173 @@
     		
     		<!-- Menu load -->
 	   		<script type="text/javascript">
-	   			var hash = window.location.hash;
-	   			$.Menu.CreateMenu($('#leftContent'), 'question.htm' + ( hash ? hash : '' ));
+	   			var questionId = window.location.hash.substring(1);
+	   			$.Menu.CreateMenu($('#leftContent'), 'question.htm?' + questionId + "#" + questionId);
+	   			
+	   			google.load('visualization', '1.0', {'packages':['corechart']});
+		        
+		        // Set a callback to run when the Google Visualization API is loaded.
+		        google.setOnLoadCallback(function() {
+		        	
+		        });
 	   		</script>
 	   		
 	   		<!-- Content div -->
     		<div id="rightContent" class="rightContent">
-		    
+				<div class="newChart">
+					<div id="hideable" class="hideable">
+						<div id="choices" class="choices"></div>
+						<div class="choicesOption">
+							<span onclick="$('.choices input[type=checkbox]').prop('checked', true);">Todas</span> - 
+							<span onclick="$('.choices input[type=checkbox]').prop('checked', false);">Ninguna</span>
+						</div>
+						
+						<div id="chartType" class="chartType">
+							<img src="../img/pieChart-on.png" alt="Pie" chart="pieChart" />
+							<img src="../img/columnChart.png" alt="Column" chart="columnChart"/>
+							<img src="../img/lineChart.png" alt="Line" chart="lineChart" />
+							<img src="../img/barChart.png" alt="Bar" chart="barChart" />
+						</div>
+						
+						<div id="granularity" class="granularity">
+							<div>
+								<input type="radio" name="granularity" value="month" checked="checked"/> 
+								Mes
+							</div>
+							<div>
+								<input type="radio" name="granularity" value="week"/>
+								Semana
+							</div>
+							<div>
+								<input type="radio" name="granularity" value="day"/>
+								Día
+							</div>
+							<div>
+								<input type="radio" name="granularity" value="hour"/>
+								Hora
+							</div>
+						</div>
+						
+						<div class="date">
+							<label for="start">Desde </label><input id="start" />
+							<label for="end">Hasta </label><input id="end" />
+						</div>
+						
+						<div class="generate">
+							<input type="submit" class="newChartButton" 
+								value="Generar gráfico" onclick="_generateChart()" />
+						</div>
+					</div>
+
+					<div id="showHideArrow" class="showHide" onclick="_showHide();">
+						<img id="arrow" src="../img/arrow-right.png" alt="Escondes" />
+					</div>
+				</div>
+				
+				
+				<div id="questionCharts" class="charts" style="float: left;"></div>	    
+			    
 			    <!-- Place content here -->
-			    <div style="text-align: left;">
-			    	questions...
-			    </div>
+			    <script type="text/javascript">
+				    $.Question.ShowChoices(questionId);
+				    
+				    var datePickeroptions = {
+				    		dateFormat 	: "dd-mm-yy",
+				    		changeMonth : true,
+				    		changeYear 	: true,
+				    		defaultDate : -30,
+				    		firstDay	: 1,
+				    		minDate		: new Date(2013, 0, 1),	
+				    		maxDate 	: 0,
+				    		dayNames 	: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+				    		dayNamesMin : ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+				    		monthNames	: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+				    		          	   "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+				    		monthNamesShort : ["En", "Feb", "Mar", "Abr", "Mayo", "Jun", "Jul", "Ago", "Sept", "Oct",
+				    		                   "Nov", "Dic"],
+				    };
+				    
+				    datePickeroptions.onSelect = function() {
+		    			$('#end').datepicker("option", "minDate", $('#start').datepicker("getDate"));
+		    		};
+				    $('#start').datepicker(datePickeroptions);
+				    $('#start').datepicker("setDate", "-1m");
+				    
+				    datePickeroptions.defaultDate = 0;
+				    datePickeroptions.onSelect = function() {
+				    	$('#start').datepicker("option", "maxDate", $('#end').datepicker("getDate"));
+				    };
+				    $('#end').datepicker(datePickeroptions);
+				    $('#end').datepicker("setDate", "0");
+				    
+				    var chartType = "pieChart";
+				    
+				    $('.chartType img').click(function() {
+				    	chartType = $(this).attr('chart');
+				    	$(this).attr('src', '../img/' + chartType + '-on.png');
+				    	$('.chartType img[chart!=' + chartType + ']').each(function(i, item){
+				    		$(item).attr('src', '../img/' + $(item).attr('chart') + '.png');
+				    	});	
+				    });
+				    
+				    $('.granularity input[type=radio]').click(function() {
+				    	
+				    });
+				    
+				    function _generateChart() {
+				    	var divId = Math.round(Math.random()*1000000);
+				    	
+				    	$('<div>', {
+				    		id		: divId,
+				    		class 	: "chart chartLoading questionChart",
+				    		style	: "float: left;"
+				    	}).appendTo('#questionCharts');
+				    			
+				    	var choices = [];
+				    	$("#choices input[type=checkbox]:checked").each(function(i, item) {
+				    		choices.push($(item).val()); 
+				    	}).val();
+				    	
+				    	var options = {
+				    		choices			: choices,
+				    		granularity		: $("#granularity input[name='granularity']:checked").first().val(),
+				    		chartType 		: chartType,
+				    		chartContainer	: divId,
+				    		start			: $.DateTimeFormatter.Format($('#start').datepicker("getDate")),
+				    		end				: $.DateTimeFormatter.EndOfDay($('#end').datepicker("getDate")),
+				    		
+				    		
+				    	}
+				    	
+				    	$.Question.GenerateChart(2, questionId, options);
+				    	
+				    	return false;
+				    }
+				    
+				    function _showHide() {
+				    	if($('#hideable').is(':visible')) {
+				    		$('#hideable').hide('slide', {
+				    			direction: 'left',
+				    			complete : function() {
+				    				$('#arrow').attr("src", "../img/arrow-right.png");
+				    			}}, 500);
+				    	}
+				    	else {
+				    		$('#hideable').show('slide', {
+				    			direction: 'left',
+				    			complete : function() {
+				    				$('#arrow').attr("src", "../img/arrow-left.png");
+				    			}}, 500);
+				    	}
+				    }
+				    
+				    $('#hideable').hide();
+			    </script>
 			    
 			    <!-- When content loaded, trigger event -->
 			    <script type="text/javascript">
 			    	$(document).trigger('pageLoaded', []);
 			    </script>
-		    
 		   	</div>
 	   	</div>
 	   	

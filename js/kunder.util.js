@@ -11,6 +11,16 @@ jQuery.DateTimeFormatter = (function($) {
 			return _format(new Date());
 		}
 		
+		function _endOfDay(date) {
+			var date = new Date();
+			date.setHours(23, 59, 59, 999);
+			return _format(date);
+		}
+		
+		function _endOfToday() {
+			return _endOfDay(new Date());
+		}
+		
 		function _formatNumber(number) {
 			if(parseInt(number) == Number.NaN)
 			{
@@ -29,7 +39,9 @@ jQuery.DateTimeFormatter = (function($) {
 		
 	  return {
 		    Now: _now,
-		    Format: _format
+		    Format: _format,
+		    EndOfDay : _endOfDay,
+		    EndOfToday : _endOfToday,
 		  };
 }(jQuery));
 

@@ -2,8 +2,7 @@ jQuery.Votes = (function($) {
 
 	function _getDashboardData() {
 		$.Server.getPollQuestions(2, _getQuestionSuccessCallback);
-		_getWeeklyVotes();
-		_getDayVotes();
+		$.Server.getDayVotes(2, _getDayVotesSuccessCallback);
 	}
 	
 	function _getQuestionSuccessCallback(data) {
@@ -30,7 +29,7 @@ jQuery.Votes = (function($) {
 				question.choices[j].id = data.questions[i].choices[j].id;
 				question.choices[j].text = data.questions[i].choices[j].text;
 				
-				ajaxs[j] = $.Server.getQuestionVotes(
+				ajaxs[j] = $.Server.getQuestionVotes_old(
 						question.pollId, 
 						question.id, 
 						question.choices[j].id, 
@@ -67,8 +66,17 @@ jQuery.Votes = (function($) {
 		deferred.resolve();
 	}
 	
-	function _getDayVotes() {
-		_createDayVotesDataTable();
+	function _getDayVotesSuccessCallback(dayData) {
+		var data = new google.visualization.DataTable(dayData);
+		
+		//TODO: timezone offset
+//		var timezone = new Date().getTimezoneOffset() / -60;
+//		console.log(timezone);
+//		var formatter = new google.visualization.DateFormat({'timeZone' : timezone});
+//    	formatter.format(data, 0);
+		
+    	$.Charts.DrawDashboardDayVotes(data);
+		
 	}
 	
 	function _createDayVotesDataTable() {

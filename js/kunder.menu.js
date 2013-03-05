@@ -30,8 +30,8 @@ jQuery.Menu = (function($) {
 		  	});
 			//Change page, si href está definido el click cambia de página, si no no pasa nada
 			$("[href]").click(function(e) {
-					e.preventDefault();
-					$.Menu.ChangePage($(this).attr("href"));
+					//e.preventDefault();
+					//_changePage($(this).attr("href"));
 					$(this).parent().append($('<div>').attr("class", "sideMenuLoading"));
 				}
 			);
@@ -43,7 +43,7 @@ jQuery.Menu = (function($) {
 	function _suscribeEvent() {
 		$(document).on("questionsChanged", _questionsChanged);
 		$(document).on("pageLoaded", _pageLoaded);
-		$(window).on("popstate", _popstate);
+		//$(window).on("popstate", _popstate);
 	}
 	
 	function _questionsChanged(e) {
@@ -53,7 +53,8 @@ jQuery.Menu = (function($) {
 	function _pageLoaded() {
 		$('.sideMenuLoading').remove();
 	}
-	
+
+	/* Métodos para que funcione con push y pop state
 	function _popstate(event) {
 		var state = event.originalEvent.state;
 		if(state) {
@@ -78,9 +79,9 @@ jQuery.Menu = (function($) {
 			},
 		});
 	}
+	*/
 	
 	return {
 		CreateMenu	: _createMenu,
-		ChangePage	: _changePage,
 	};
 }(jQuery));

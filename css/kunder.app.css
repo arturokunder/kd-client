@@ -73,7 +73,31 @@ input[type=text], input[type=password] {
 	margin-right: auto;
 	
 	text-align: center;
+	
+	position: relative;
 }
+
+.chart {
+	padding: 10px;
+	margin: 10px;
+	margin-top: 0px;
+	width: 350px;
+	height: 250px;
+	
+	display: inline-block;
+	
+	background-color: #FFFFFF;
+	
+	border-radius: 10px;
+}
+
+.chartLoading {
+	background-image: url("../img/loading.gif");
+	background-repeat: no-repeat;
+	background-size: 50px;
+	background-position: 50% 50%;
+}
+
 .footer {
 	text-align: center;
 	margin-left: auto;
