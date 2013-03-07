@@ -120,6 +120,8 @@ jQuery.Server = (function($) {
 		getQuestionVotes	: _getQuestionVotes,
 		getDayVotes			: _getDayVotes,
 		
-		getQuestionVotes_old : _getQuestionVotes_old
+		getQuestionVotes_old : _getQuestionVotes_old,
+		
+		GenerateTokenData 	: _generateTokenData,
 	};
 }(jQuery));
